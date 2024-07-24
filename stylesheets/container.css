@@ -1,0 +1,5 @@
+QFrame {
+	background-color: (bg_color);
+	border-radius: (border_radius)px;
+	border: (border_size)px solid (border_color);
+}

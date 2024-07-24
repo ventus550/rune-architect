@@ -1,0 +1,7 @@
+QLineEdit {
+	color: (color);
+	selection-color: (selection_color);
+	background-color: (bg_color);
+	selection-background-color: transparent;
+	border: none;
+}
