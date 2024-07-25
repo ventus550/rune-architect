@@ -40,7 +40,8 @@ class ApplicationWindow(QMainWindow):
     def __init__(self, minw=800, minh=600, name="ApplicationName") -> None:
         self.sysapp = QApplication(sys.argv)
         self.sysapp.setQuitOnLastWindowClosed(True)
-        self.sysapp.setWindowIcon(QIcon("assets/icon.ico"))
+        self.sysapp.setWindowIcon(QIcon(str(settings.assets_directory / "icon.ico")))
+        self.sysapp.setApplicationName(name)
         self.drag_position: QPoint = None
 
         super().__init__()

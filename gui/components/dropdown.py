@@ -5,7 +5,7 @@ from . import (
     QComboBox,
     QGraphicsDropShadowEffect,
 )
-from .settings import theme
+from .settings import theme, settings
 
 
 class Dropdown(QComboBox, metaclass=Component):
@@ -20,6 +20,7 @@ class Dropdown(QComboBox, metaclass=Component):
         menu_color=theme.text_foreground,
         selection_background_color=theme.bg_one,
         selection_color=theme.context_hover,
+        arrow_icon_url=f"url({settings.assets_directory / "icon_menu.svg"})"
     ):
         super().__init__(parent)
         self.view().window().setStyleSheet("border-radius: 10px;")
@@ -37,6 +38,7 @@ class Dropdown(QComboBox, metaclass=Component):
         if width:
             self.setFixedWidth(width)
 
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.view().window().setWindowFlags(
             Qt.WindowType.Popup
             | Qt.WindowType.FramelessWindowHint

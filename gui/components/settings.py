@@ -3,8 +3,8 @@ from pathlib import Path
 
 class settings:
     app_name = "Rune Architect"
-    stylesheets_directory = Path("stylesheets")
-    assets_directory = Path("assets")
+    stylesheets_directory = Path("gui/stylesheets")
+    assets_directory = Path("gui/assets")
     font_path = assets_directory / "recharge.otf"
     app_height = 600
     app_width = 800
@@ -33,9 +33,8 @@ class theme:
     white = "#f5f6f9"
     pink = "#ff007f"
     green = "#00ff7f"
-    red = "#ff5555"
+    red = "#941801"
     yellow = "#f1fa8c"
     font_family = "recharge"
-    red = "#941801"
     title_size = 10
     text_size = 9
