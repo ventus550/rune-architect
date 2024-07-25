@@ -80,7 +80,6 @@ class DataFrame(QTableWidget, metaclass=Component):
         self.verticalHeader().setMinimumSectionSize(30)
         
         # Window settings
-        # self.setMinimumHeight(500)
         self.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.setItemDelegate(NumericDelegate(self, maxlen=10, placeholder=placeholder))
         self.index = []
