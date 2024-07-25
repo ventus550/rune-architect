@@ -1,8 +1,15 @@
-from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QApplication
-from PyQt6.QtCore import Qt, QPoint
-from PyQt6.QtGui import QFontDatabase, QIcon
+from . import (
+    Component,
+    QWidget,
+    QMainWindow,
+    QVBoxLayout,
+    QApplication,
+    Qt,
+    QPoint,
+    QFontDatabase,
+    QIcon,
+)
 from .settings import theme, settings
-from .component import Component
 import sys
 
 

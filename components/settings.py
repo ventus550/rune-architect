@@ -1,7 +1,4 @@
 from pathlib import Path
-from contextlib import suppress
-import inspect
-import re
 
 
 class settings:
@@ -38,37 +35,7 @@ class theme:
     green = "#00ff7f"
     red = "#ff5555"
     yellow = "#f1fa8c"
-    font_family="recharge"
+    font_family = "recharge"
     red = "#941801"
-    title_size=10
-    text_size=9
-
-    def __call__(self, cls):
-        __init__ = cls.__init__
-
-        def retrieve_kwargs(func):
-            signature = inspect.signature(func)
-            return {
-                param.name: param.default
-                for param in signature.parameters.values()
-                if param.default != inspect.Parameter.empty
-            }
-
-        def inject_settings(dictionary, text, pattern=r"\((\w+)\)"):
-            return re.sub(pattern, lambda match: str(dictionary[match.group(1)]), text)
-
-        def __style_init__(self, *args, **kwargs):
-            __init__(self, *args, **kwargs)
-
-            directory = retrieve_kwargs(__init__)
-            directory.update(kwargs)
-
-            with suppress(FileNotFoundError):
-                filename = Path(__init__.__globals__["__file__"]).stem
-                css = open(f"{settings.stylesheets_directory}/{filename}.css").read()
-                self.setStyleSheet(inject_settings(directory, css))
-
-        cls.__init__ = __style_init__
-        return cls
-
-theme = theme()
+    title_size = 10
+    text_size = 9

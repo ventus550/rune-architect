@@ -1,21 +1,21 @@
-from .icon_button import IconButton
-from .settings import settings
 from . import (
+    IconButton,
     QWidget,
-    QCursor,
     Qt,
     QSize,
     QVBoxLayout,
     QFrame,
     QHBoxLayout,
     QLabel,
+    pyqtSignal,
+    QSvgWidget,
 )
-
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtSvgWidgets import QSvgWidget
+from .alignment import *
+from .settings import settings
 
 _is_maximized = False
 _old_size = QSize()
+
 
 class TitleBar(QWidget):
     clicked = pyqtSignal(object)
@@ -30,13 +30,11 @@ class TitleBar(QWidget):
         btn_bg_color="#343b48",
         btn_bg_color_hover="#3c4454",
         btn_bg_color_pressed="#2c313c",
-        icon_color="#c3ccdf",
         icon_color_hover="#dce1ec",
         icon_color_pressed="#edf0f5",
         icon_color_active="#f5f6f9",
         context_color="#6c99f4",
         radius=8,
-        font_family="Segoe UI",
         title_size=12,
         title=settings.app_name,
     ):
@@ -63,7 +61,7 @@ class TitleBar(QWidget):
         self.bg.setStyleSheet(
             f"background-color: {bg_color}; border-radius: {radius}px;"
         )
-        
+
         # ADD MENU LAYOUT
         self.title_bar_layout = QVBoxLayout(self)
         self.title_bar_layout.addWidget(self.bg)
@@ -97,11 +95,14 @@ class TitleBar(QWidget):
                 # event.accept()
                 return
             if event.buttons() == Qt.MouseButton.LeftButton:
-                parent.move(parent.pos() + event.globalPosition().toPoint() - parent.drag_position)
+                parent.move(
+                    parent.pos()
+                    + event.globalPosition().toPoint()
+                    - parent.drag_position
+                )
                 # parent.move(parent.pos() + event.globalPosition().toPoint() - parent.drag_position)
                 parent.drag_position = event.globalPosition().toPoint()
                 event.accept()
-
 
         # MOVE APP WIDGETS
         self.top_logo.mouseMoveEvent = moveWindow
@@ -144,7 +145,7 @@ class TitleBar(QWidget):
     def attach_title_label(self):
         self.title_label = QLabel()
         self.bg_layout.addWidget(self.title_label)
-        self.title_label.setAlignment(Qt.AlignmentFlag.AlignVCenter)
+        self.title_label.setAlignment(AlignVCenter)
         self.title_label.setStyleSheet(f"font-size: {self.title_size}pt;")
         self.title_label.setText(self.title)
 
@@ -157,9 +158,7 @@ class TitleBar(QWidget):
         self.top_logo_layout.setContentsMargins(0, 0, 0, 0)
         self.logo_svg = QSvgWidget()
         self.logo_svg.load(str(settings.assets_directory / self.logo_image))
-        self.top_logo_layout.addWidget(
-            self.logo_svg, Qt.AlignmentFlag.AlignCenter, Qt.AlignmentFlag.AlignCenter
-        )
+        self.top_logo_layout.addWidget(self.logo_svg, AlignCenter, AlignCenter)
         self.top_logo.setMinimumWidth(100)
         self.top_logo.setMaximumWidth(100)
 

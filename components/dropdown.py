@@ -1,15 +1,11 @@
-import sys
-from PyQt6.QtWidgets import (
-    QApplication,
+from . import (
+    Component,
+    QColor,
+    Qt,
     QComboBox,
-    QWidget,
-    QVBoxLayout,
     QGraphicsDropShadowEffect,
 )
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor
 from .settings import theme
-from .component import Component
 
 
 class Dropdown(QComboBox, metaclass=Component):

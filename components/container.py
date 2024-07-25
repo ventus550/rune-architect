@@ -1,15 +1,12 @@
 from . import (
+    Component,
     QFrame,
-    QWidget,
-    Qt,
     QGraphicsDropShadowEffect,
     QColor,
     QLayout,
     QGridLayout,
     QSizePolicy,
 )
-from .settings import theme
-from .component import Component
 
 
 # @theme
@@ -19,8 +16,8 @@ class Container(QFrame, metaclass=Component):
         margin=0,
         spacing=0,
         shadow=False,
-        rstretch = [],
-        cstretch = [],
+        rstretch=[],
+        cstretch=[],
         # STYLESHEET
         border_radius=10,
         border_size=2,
