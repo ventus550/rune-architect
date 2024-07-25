@@ -1,21 +1,18 @@
-import sys
-from PyQt6.QtWidgets import (
-    QApplication,
+from . import (
+    Component,
+    QColor,
+    Qt,
     QComboBox,
-    QWidget,
-    QVBoxLayout,
     QGraphicsDropShadowEffect,
 )
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor
-from .settings import theme
+from .settings import theme, settings
 
 
-@theme
-class Dropdown(QComboBox):
+class Dropdown(QComboBox, metaclass=Component):
     def __init__(
         self,
         parent=None,
+        width=None,
         button_background_color=theme.bg_one,
         button_color=theme.text_foreground,
         button_border_color="transparent",
@@ -23,19 +20,25 @@ class Dropdown(QComboBox):
         menu_color=theme.text_foreground,
         selection_background_color=theme.bg_one,
         selection_color=theme.context_hover,
+        arrow_icon_url=f"url({settings.assets_directory / "icon_menu.svg"})"
     ):
         super().__init__(parent)
         self.view().window().setStyleSheet("border-radius: 10px;")
 
         self.view().setStyleSheet(
-            "QListView{"
-            "border: none;"
-            "border-radius: 8px;"
-            "margin: 4px;"
-            "margin-top: 0px;"
-            "}"
+            """
+            QListView {
+                border: none;
+                border-radius: 8px;
+                margin: 4px;
+                margin-top: 0px;
+            }"""
         )
 
+        if width:
+            self.setFixedWidth(width)
+
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.view().window().setWindowFlags(
             Qt.WindowType.Popup
             | Qt.WindowType.FramelessWindowHint

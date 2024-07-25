@@ -20,7 +20,7 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-	image: url(assets/icon_menu.svg);
+	image: (arrow_icon_url);
 	width: 10px;
 	height: 10px;
 }

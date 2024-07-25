@@ -1,10 +1,8 @@
-from PyQt6.QtWidgets import QPushButton
-from PyQt6.QtCore import Qt
+from . import Component, QPushButton, Qt
 from .settings import theme
 
 
-@theme
-class Button(QPushButton):
+class Button(QPushButton, metaclass=Component):
     def __init__(
         self,
         text="Button",

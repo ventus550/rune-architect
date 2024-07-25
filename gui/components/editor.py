@@ -1,10 +1,9 @@
 from PyQt6.QtGui import QKeyEvent
-from . import QLineEdit, QTimer, QColor, QPainter, QIntValidator, Qt
+from . import Component, QKeyEvent, QLineEdit, QTimer, QColor, QPainter, QIntValidator, Qt
 from .settings import theme
 
 
-@theme
-class Editor(QLineEdit):
+class Editor(QLineEdit, metaclass=Component):
 	def __init__(
 		self,
 		parent=None,

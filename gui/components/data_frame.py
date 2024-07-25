@@ -1,20 +1,18 @@
 from . import (
+    Component,
+    Editor,
     QTableWidget,
     QTableWidgetItem,
     QAbstractItemView,
     QStyledItemDelegate,
-    QLineEdit,
-    QIntValidator,
     Qt,
     QHeaderView,
-    QPalette,
-    QColor,
 )
+from .alignment import *
 import numpy
 import pandas
 from itertools import product
 from .settings import theme
-from .editor import Editor
 
 
 class NumericDelegate(QStyledItemDelegate):
@@ -44,12 +42,11 @@ class NumericDelegate(QStyledItemDelegate):
         text = index.model().data(index, Qt.ItemDataRole.DisplayRole)
         if text == "":
             text = self.placeholder
-        painter.drawText(option.rect, Qt.AlignmentFlag.AlignCenter, str(text))
+        painter.drawText(option.rect, AlignCenter, str(text))
         painter.restore()
 
 
-@theme
-class DataFrame(QTableWidget):
+class DataFrame(QTableWidget, metaclass=Component):
     def __init__(
         self,
         data,
@@ -58,7 +55,7 @@ class DataFrame(QTableWidget):
         radius=8,
         color=theme.text_foreground,
         selection_color=theme.context_color,
-        bg_color=theme.bg_two,
+        bg_color="transparent",
         header_horizontal_color=theme.dark_two,
         header_vertical_color=theme.dark_two,
         bottom_line_color=theme.bg_three,
@@ -72,21 +69,19 @@ class DataFrame(QTableWidget):
         self.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.horizontalHeader().setSectionsClickable(False)
         self.horizontalHeader().setMinimumHeight(30)
-        
+
         # Vertical header (index) settings
         if not flexible_rows:
             self.verticalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
         self.verticalHeader().setSectionsClickable(False)
         self.verticalHeader().setMinimumSectionSize(30)
-        
+
         # Window settings
-        self.setMaximumHeight(500)
         self.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.setItemDelegate(NumericDelegate(self, maxlen=10, placeholder=placeholder))
         self.index = []
         self.label = []
         self.data = data
-
 
     @property
     def data(self):
