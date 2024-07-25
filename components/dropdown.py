@@ -9,10 +9,11 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QColor
 from .settings import theme
+from .component import Component
 
 
-@theme
-class Dropdown(QComboBox):
+
+class Dropdown(QComboBox, metaclass=Component):
     def __init__(
         self,
         parent=None,

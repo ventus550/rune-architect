@@ -15,6 +15,7 @@ import pandas
 from itertools import product
 from .settings import theme
 from .editor import Editor
+from .component import Component
 
 
 class NumericDelegate(QStyledItemDelegate):
@@ -48,8 +49,7 @@ class NumericDelegate(QStyledItemDelegate):
         painter.restore()
 
 
-@theme
-class DataFrame(QTableWidget):
+class DataFrame(QTableWidget, metaclass=Component):
     def __init__(
         self,
         data,
