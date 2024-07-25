@@ -57,7 +57,7 @@ class Container(QFrame, metaclass=Component):
         if isinstance(rows, int):
             rows = (rows,)
         for row in rows:
-            self.setColumnStretch(row, stretch)
+            self.setRowStretch(row, stretch)
         return self
 
     def setColumnsStretch(self, columns, stretch=1):

@@ -58,7 +58,7 @@ class DataFrame(QTableWidget, metaclass=Component):
         radius=8,
         color=theme.text_foreground,
         selection_color=theme.context_color,
-        bg_color=theme.bg_two,
+        bg_color="transparent", #theme.bg_two,
         header_horizontal_color=theme.dark_two,
         header_vertical_color=theme.dark_two,
         bottom_line_color=theme.bg_three,
@@ -80,7 +80,7 @@ class DataFrame(QTableWidget, metaclass=Component):
         self.verticalHeader().setMinimumSectionSize(30)
         
         # Window settings
-        self.setMaximumHeight(500)
+        # self.setMinimumHeight(500)
         self.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.setItemDelegate(NumericDelegate(self, maxlen=10, placeholder=placeholder))
         self.index = []

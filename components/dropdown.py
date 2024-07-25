@@ -12,11 +12,11 @@ from .settings import theme
 from .component import Component
 
 
-
 class Dropdown(QComboBox, metaclass=Component):
     def __init__(
         self,
         parent=None,
+        width=None,
         button_background_color=theme.bg_one,
         button_color=theme.text_foreground,
         button_border_color="transparent",
@@ -29,13 +29,17 @@ class Dropdown(QComboBox, metaclass=Component):
         self.view().window().setStyleSheet("border-radius: 10px;")
 
         self.view().setStyleSheet(
-            "QListView{"
-            "border: none;"
-            "border-radius: 8px;"
-            "margin: 4px;"
-            "margin-top: 0px;"
-            "}"
+            """
+            QListView {
+                border: none;
+                border-radius: 8px;
+                margin: 4px;
+                margin-top: 0px;
+            }"""
         )
+
+        if width:
+            self.setFixedWidth(width)
 
         self.view().window().setWindowFlags(
             Qt.WindowType.Popup
