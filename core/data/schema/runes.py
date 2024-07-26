@@ -1,5 +1,5 @@
-from pandera.typing import *
-from pandera import *
+from pandera import DataFrameModel, Field
+from pandera.typing import Series
 from core.data import mapping
 
 class Runes(DataFrameModel):
@@ -43,3 +43,6 @@ class SparseRunes(Runes):
     Tolerance: Series[bool]
     Seal: Series[bool]
     Intangible: Series[bool]
+
+class NamedMonsterRunes(Runes):
+    monster: Series[str] = Field(isin=set(mapping.monsters.names.values()), nullable=True)

@@ -1,5 +1,5 @@
-from pandera.typing import *
-from pandera import *
+from pandera import DataFrameModel, Field
+from pandera.typing import Series, Index
 from core.data import mapping
 
 
@@ -18,3 +18,4 @@ class Monsters(DataFrameModel):
     create_time: Series[object]
     source: Series[int]
     name: Series[str] = Field(isin=list(mapping.monsters.names.values()), nullable=True)
+    id: Index[int]
