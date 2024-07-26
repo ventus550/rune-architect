@@ -46,4 +46,4 @@ class ApplicationLayout(ApplicationWindow):
         
         
         container[2, 0, 1, 2] = self.results = DataFrame(data, editable=False)
-        self.results.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        self.results.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)

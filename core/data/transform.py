@@ -11,6 +11,6 @@ def filter_equipped(runes: DataFrame[Runes], monsters: DataFrame[Monsters], mons
 	return runes[runes.monster.isin([0, *selected_monster_id])]
 
 @check_types
-def named_monsters_runes_view(runes: DataFrame[Runes], monsters: DataFrame[Monsters]) -> DataFrame[NamedMonsterRunes]:
+def named_monster_runes_view(runes: DataFrame[Runes], monsters: DataFrame[Monsters]) -> DataFrame[NamedMonsterRunes]:
 	view = runes.merge(monsters["name"], left_on="monster", right_index=True, how="left")
 	return view.drop(columns=["monster"]).rename(columns={"name": "monster"}).sort_values("slot")

@@ -125,8 +125,11 @@ class DataFrame(QTableWidget, metaclass=Component):
                 row, col, QTableWidgetItem(str(value) if pandas.notna(value) else "")
             )
 
-        self.resizeColumnsToContents()
-        self.resizeRowsToContents()
+        # self.resizeColumnsToContents()
+        # self.resizeRowsToContents()
+        # self.repaint()
+        # self.updateGeometry()
+        # self.repaint()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
