@@ -9,7 +9,7 @@ def json(filename: str):
     return js.load(open(filename, "r", encoding="utf-8"))
 
 
-def rune2vec(rune):
+def rune2vec(rune: Series):
     try:
         eff_prefix = rune["prefix_eff"]
         eff_primary = rune["pri_eff"]
@@ -26,8 +26,7 @@ def rune2vec(rune):
         return 0
     return rune_vector
 
-
-def rune2series(rune):
+def rune2series(rune: Series):
     labels = [
         mapping.runes.effects.get(i, "empty") for i in range(13)
     ]  # account for 0 and 7 unused indices

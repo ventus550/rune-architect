@@ -18,3 +18,28 @@ class Runes(DataFrameModel):
     crd: Series[int] = Field(ge=0)
     res: Series[int] = Field(ge=0)
     acc: Series[int] = Field(ge=0)
+
+class SparseRunes(Runes):
+    Energy: Series[bool]
+    Guard: Series[bool]
+    Swift: Series[bool]
+    Blade: Series[bool]
+    Rage: Series[bool]
+    Focus: Series[bool]
+    Endure: Series[bool]
+    Fatal: Series[bool]
+    Despair: Series[bool]
+    Vampire: Series[bool]
+    Violent: Series[bool]
+    Nemesis: Series[bool]
+    Will: Series[bool]
+    Shield: Series[bool]
+    Revenge: Series[bool]
+    Destroy: Series[bool]
+    Fight: Series[bool]
+    Determination: Series[bool]
+    Enhance: Series[bool]
+    Accuracy: Series[bool]
+    Tolerance: Series[bool]
+    Seal: Series[bool]
+    Tntangible: Series[bool]
