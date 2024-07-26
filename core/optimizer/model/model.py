@@ -31,7 +31,7 @@ class Model:
 
 	def solve(self):
 		model = self.constraints.copy()
-		model += self.objective
+		model += self.objective.copy()
 
 		return dict(
 			status=LpStatus[model.solve(PULP_CBC_CMD(msg=False))],

@@ -19,11 +19,10 @@ def optimize(
     solution = model.solve()
     if solution["status"] == LpStatusInfeasible:
         return None
-
     return runes.loc[
         [
             model.items2runes[var][0]
             for var in solution["variables"]
-            if value(var) > 0 and var in model.items2runes
+            if value(var) and var in model.items2runes # value(var) may happen to be none
         ]
     ]
