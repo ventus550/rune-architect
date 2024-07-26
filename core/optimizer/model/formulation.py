@@ -33,7 +33,7 @@ class Formulation(Model):
 
         # set constraints
         for set, count in sets.items():
-            self.constraints += runes[set] @ self.items >= count
+            self.constraints += runes[set] @ self.items >= 2*count
 
         # set synergies
         self.constraints += self.multi_synergy_constraint("Energy", 15, "hp%")

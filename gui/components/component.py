@@ -31,7 +31,7 @@ class Component(type(QWidget)):
         return {
             param.name: param.default
             for param in signature.parameters.values()
-            if param.default != inspect.Parameter.empty
+            if type(param.default) != inspect.Parameter.empty
         }
 
     def inject_settings(dictionary, text, pattern=r"\((\w+)\)"):

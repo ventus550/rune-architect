@@ -4,7 +4,7 @@ from ..data.schema import *
 from .model import Formulation
 
 
-@check_types
+@check_types(with_pydantic=True)
 def optimize(
     runes: DataFrame[Runes], weight_min_max: DataFrame[WeightMinMax], sets={}
 ) -> DataFrame[Runes]:
@@ -21,5 +21,9 @@ def optimize(
         return None
 
     return runes.loc[
-        [model.items2runes[var][0] for var in solution["variables"] if value(var) > 0]
+        [
+            model.items2runes[var][0]
+            for var in solution["variables"]
+            if value(var) > 0 and var in model.items2runes
+        ]
     ]

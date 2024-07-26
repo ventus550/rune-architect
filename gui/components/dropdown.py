@@ -59,6 +59,14 @@ class Dropdown(QComboBox, metaclass=Component):
         self.setInsertPolicy(QComboBox.InsertPolicy.NoInsert)
         self.setMaxVisibleItems(30)
 
+    @property
+    def value(self) -> str:
+        return self.currentText()
+
+    @value.setter
+    def value(self, text: str):
+        self.setCurrentText(text)
+
     def addItems(self, items):
         super().addItems(items)
         return self

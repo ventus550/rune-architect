@@ -21,7 +21,7 @@ sets = {
     22: 'Accuracy',
     23: 'Tolerance',
     24: 'Seal',
-    25: 'Tntangible',
+    25: 'Intangible',
     99: 'Immemorial',
 }
 

@@ -15,32 +15,40 @@ from itertools import product
 from .settings import theme
 
 
-class NumericDelegate(QStyledItemDelegate):
-    def __init__(self, parent=None, maxlen=10, placeholder="", bg_color=theme.bg_two):
+class Delegate(QStyledItemDelegate):
+    def __init__(
+        self,
+        parent=None,
+        numeric=False,
+        maxlen=10,
+        placeholder="",
+        bg_color=theme.bg_two,
+    ):
         super().__init__(parent)
         self.maxlen = maxlen
         self.placeholder = placeholder
         self.bg_color = bg_color
+        self.numeric = numeric
 
     def createEditor(self, parent, option, index):
         return Editor(
             parent=parent,
-            numeric=True,
+            numeric=self.numeric,
             placeholder=self.placeholder,
             maxlen=self.maxlen,
         )
 
     def setEditorData(self, editor, index):
-        text = index.model().data(index, Qt.ItemDataRole.EditRole)
-        editor.setText(str(text))
+        text = str(index.model().data(index, Qt.ItemDataRole.EditRole))
+        editor.setText(text)
 
     def setModelData(self, editor, model, index):
         model.setData(index, editor.text(), Qt.ItemDataRole.EditRole)
 
     def paint(self, painter, option, index):
         painter.save()
-        text = index.model().data(index, Qt.ItemDataRole.DisplayRole)
-        if text == "":
+        text = str(index.model().data(index, Qt.ItemDataRole.DisplayRole))
+        if text == "" or (self.numeric and not text.isnumeric()):
             text = self.placeholder
         painter.drawText(option.rect, AlignCenter, str(text))
         painter.restore()
@@ -49,9 +57,12 @@ class NumericDelegate(QStyledItemDelegate):
 class DataFrame(QTableWidget, metaclass=Component):
     def __init__(
         self,
-        data,
+        data=pandas.DataFrame(),
+        numeric=False,
         placeholder="",
         flexible_rows=False,
+        maxlen=10,
+        editable=True,
         radius=8,
         color=theme.text_foreground,
         selection_color=theme.context_color,
@@ -78,7 +89,10 @@ class DataFrame(QTableWidget, metaclass=Component):
 
         # Window settings
         self.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
-        self.setItemDelegate(NumericDelegate(self, maxlen=10, placeholder=placeholder))
+        self.setItemDelegate(
+            Delegate(self, numeric=numeric, maxlen=maxlen, placeholder=placeholder)
+        )
+        self.editable = editable
         self.index = []
         self.label = []
         self.data = data
@@ -86,10 +100,11 @@ class DataFrame(QTableWidget, metaclass=Component):
     @property
     def data(self):
         rows, cols = len(self.index), len(self.label)
-        matrix = numpy.zeros((rows, cols))
+        matrix = numpy.zeros((rows, cols)).tolist()
         for row, col in product(range(rows), range(cols)):
-            item = self.item(row, col)
-            matrix[row, col] = item.text() if item is not None else ""
+            text = self.item(row, col).text()
+
+            matrix[row][col] = text if text else None  # pandas.NA
         return pandas.DataFrame(matrix, columns=self.label, index=self.index)
 
     @data.setter
@@ -105,7 +120,10 @@ class DataFrame(QTableWidget, metaclass=Component):
         self.setVerticalHeaderLabels(self.index)
 
         for row, col in product(range(rows), range(cols)):
-            self.setItem(row, col, QTableWidgetItem(str(df.iloc[row, col])))
+            value = df.iloc[row, col]
+            self.setItem(
+                row, col, QTableWidgetItem(str(value) if pandas.notna(value) else "")
+            )
 
         self.resizeColumnsToContents()
         self.resizeRowsToContents()
@@ -113,7 +131,7 @@ class DataFrame(QTableWidget, metaclass=Component):
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
             index = self.indexAt(event.pos())
-            if index.isValid():
+            if index.isValid() and self.editable:
                 self.model().setData(index, "")  # Clear cell data
                 self.edit(index)  # Enter edit mode
         super().mousePressEvent(event)

@@ -42,4 +42,4 @@ class SparseRunes(Runes):
     Accuracy: Series[bool]
     Tolerance: Series[bool]
     Seal: Series[bool]
-    Tntangible: Series[bool]
+    Intangible: Series[bool]
