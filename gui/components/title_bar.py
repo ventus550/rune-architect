@@ -56,7 +56,7 @@ class TitleBar(QWidget):
         # ADD BG
         self.bg = QFrame()
         self.bg_layout = QHBoxLayout(self.bg)
-        self.bg_layout.setContentsMargins(10, 0, 5, 0)
+        self.bg_layout.setContentsMargins(5, 0, 5, 0)
         self.bg_layout.setSpacing(0)
         self.bg.setStyleSheet(
             f"background-color: {bg_color}; border-radius: {radius}px;"
@@ -159,8 +159,8 @@ class TitleBar(QWidget):
         self.logo_svg = QSvgWidget()
         self.logo_svg.load(str(settings.assets_directory / self.logo_image))
         self.top_logo_layout.addWidget(self.logo_svg, AlignCenter, AlignCenter)
-        self.top_logo.setMinimumWidth(100)
-        self.top_logo.setMaximumWidth(100)
+        self.top_logo.setFixedHeight(40)
+        self.top_logo.setFixedWidth(60)
 
     def attach_buttons(self):
         self.custom_buttons_layout = QHBoxLayout()
