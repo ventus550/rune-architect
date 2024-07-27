@@ -34,7 +34,7 @@ class Formulation:
 		model += self.objective.copy()
 
 		return dict(
-			status=LpStatus[model.solve(PULP_CBC_CMD(msg=False))],
+			status=model.solve(PULP_CBC_CMD(msg=False)),
 			objective=value(model.objective),
 			variables=model.variables(),
 		)

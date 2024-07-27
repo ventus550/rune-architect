@@ -28,3 +28,18 @@ def flatten_runes(runes: DataFrame[Runes], selected_monsters: DataFrame[Monsters
 	runes["atk"] += runes["atk%"] * monster["atk"]
 	return runes.drop(columns=runes.filter(regex='%$').columns)
 
+@check_types
+def flatten_synergies(synergies: DataFrame[Synergies], selected_monsters: DataFrame[Monsters]) -> DataFrame[Synergies]:
+	monster = selected_monsters.iloc[0]
+	
+	def flatten(row):
+		row = row.copy()
+		effect = row['effect']
+		if effect.endswith('%'):
+			
+			effect = effect[:-1]
+			row.effect = effect
+			row.value = int(row.value * monster[effect]/100)
+		return row
+
+	return synergies.apply(flatten, axis=1).convert_dtypes()

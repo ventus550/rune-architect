@@ -1,6 +1,8 @@
 from pandera import DataFrameModel, Field
-from pandera.typing import Series
+from pandera.typing import Series, Index
 from core.data import mapping
+from pandas import BooleanDtype
+
 
 
 class FlatRunes(DataFrameModel):
@@ -54,3 +56,9 @@ class NamedMonsterRunes(Runes):
     monster: Series[str] = Field(
         isin=set(mapping.monsters.names.values()), nullable=True
     )
+
+class Synergies(DataFrameModel):
+    value: Series[int]
+    effect: Series[str] = Field(isin=set(mapping.runes.effects.values()))
+    stacked: Series[BooleanDtype]
+    id: Index[str] = Field(isin=set(mapping.runes.sets.values()))
