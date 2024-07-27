@@ -7,6 +7,7 @@ class Button(QPushButton, metaclass=Component):
         self,
         text="Button",
         height=None,
+        width=None,
         color="#fff",
         bg_color=theme.context_color,
         bg_hover_color=theme.context_hover,
@@ -17,6 +18,8 @@ class Button(QPushButton, metaclass=Component):
         self.text = text
         if height:
             self.setMinimumHeight(height)
+        if width:
+            self.setMinimumWidth(width)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
     @property

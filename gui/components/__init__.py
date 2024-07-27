@@ -19,3 +19,4 @@ from .dropdown import Dropdown
 from .checkbox import CheckBox
 from .editor import Editor
 from .data_frame import DataFrame
+from .messagebox import MessageBox
