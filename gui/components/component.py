@@ -22,7 +22,7 @@ class Component(type(QWidget)):
 
             with suppress(FileNotFoundError):
                 filename = Path(instance.__init__.__globals__["__file__"]).stem
-                css = open(f"{settings.stylesheets_directory}/{filename}.css").read()
+                css = open(f"{settings.directories.stylesheets}/{filename}.css").read()
                 instance.setStyleSheet(Component.inject_settings(directory, css))
             return instance
 

@@ -1,5 +1,5 @@
 from . import Component, QPushButton, Qt
-from .settings import theme
+from .settings import settings
 
 
 class Button(QPushButton, metaclass=Component):
@@ -8,10 +8,10 @@ class Button(QPushButton, metaclass=Component):
         text="Button",
         height=None,
         width=None,
-        color="#fff",
-        bg_color=theme.context_color,
-        bg_hover_color=theme.context_hover,
-        bg_pressed_color=theme.context_pressed,
+        color=settings.theme.text.color.important,
+        bg_color=settings.theme.items.color.context,
+        bg_hover_color=settings.theme.items.color.hover,
+        bg_pressed_color=settings.theme.items.color.press,
         **kwargs
     ):
         super().__init__(text=text, **kwargs)

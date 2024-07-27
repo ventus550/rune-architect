@@ -36,7 +36,7 @@ class TitleBar(QWidget):
         context_color="#6c99f4",
         radius=8,
         title_size=12,
-        title=settings.app_name,
+        title=settings.application.name,
     ):
         super().__init__()
 
@@ -157,7 +157,7 @@ class TitleBar(QWidget):
         self.top_logo_layout = QVBoxLayout(self.top_logo)
         self.top_logo_layout.setContentsMargins(0, 0, 0, 0)
         self.logo_svg = QSvgWidget()
-        self.logo_svg.load(str(settings.assets_directory / self.logo_image))
+        self.logo_svg.load(str(settings.directories.assets / self.logo_image))
         self.top_logo_layout.addWidget(self.logo_svg, AlignCenter, AlignCenter)
         self.top_logo.setFixedHeight(40)
         self.top_logo.setFixedWidth(60)
@@ -181,7 +181,7 @@ class TitleBar(QWidget):
         # MINIMIZE BUTTON
         self.minimize_button = IconButton(
             **button_style,
-            icon_path=str(settings.assets_directory / "icon_minimize.svg"),
+            icon_path=str(settings.directories.assets / "icon_minimize.svg"),
         )
         self.bg_layout.addWidget(self.minimize_button)
         self.minimize_button.released.connect(lambda: self.parent.showMinimized())
@@ -189,7 +189,7 @@ class TitleBar(QWidget):
         # MAXIMIZE / RESTORE BUTTON
         self.maximize_restore_button = IconButton(
             **button_style,
-            icon_path=str(settings.assets_directory / "icon_maximize.svg"),
+            icon_path=str(settings.directories.assets / "icon_maximize.svg"),
         )
         self.bg_layout.addWidget(self.maximize_restore_button)
         self.maximize_restore_button.released.connect(lambda: self.maximize_restore())
@@ -197,7 +197,7 @@ class TitleBar(QWidget):
         # CLOSE BUTTON
         self.close_button = IconButton(
             **button_style,
-            icon_path=str(settings.assets_directory / "icon_close.svg"),
+            icon_path=str(settings.directories.assets / "icon_close.svg"),
         )
         self.bg_layout.addWidget(self.close_button)
         self.close_button.released.connect(lambda: self.parent.close())

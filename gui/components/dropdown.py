@@ -5,7 +5,7 @@ from . import (
     QComboBox,
     QGraphicsDropShadowEffect,
 )
-from .settings import theme, settings
+from .settings import settings
 
 
 class Dropdown(QComboBox, metaclass=Component):
@@ -13,14 +13,14 @@ class Dropdown(QComboBox, metaclass=Component):
         self,
         parent=None,
         width=None,
-        button_background_color=theme.bg_one,
-        button_color=theme.text_foreground,
+        button_background_color=settings.theme.items.color.secondary,
+        button_color=settings.theme.text.color.description,
         button_border_color="transparent",
-        menu_background_color=theme.bg_two,
-        menu_color=theme.text_foreground,
-        selection_background_color=theme.bg_one,
-        selection_color=theme.context_hover,
-        arrow_icon_url=f"url({settings.assets_directory / "icon_menu.svg"})"
+        menu_background_color=settings.theme.background.frames,
+        menu_color=settings.theme.text.color.description,
+        selection_background_color=settings.theme.background.containers,
+        selection_color=settings.theme.items.color.context,
+        arrow_icon_url=f"url({settings.directories.assets / "icon_menu.svg"})"
     ):
         super().__init__(parent)
         self.view().window().setStyleSheet("border-radius: 10px;")

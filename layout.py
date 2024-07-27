@@ -9,18 +9,28 @@ from gui.components import (
     QSizePolicy,
 )
 from gui.components.alignment import *
-from gui.components.settings import theme
+from gui.components.settings import settings
 
 
 class ApplicationLayout(ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        window: Container = Container(shadow=True, margin=10, spacing=10, bg_color=theme.bg_one)
+        window: Container = Container(
+            shadow=True,
+            margin=10,
+            spacing=10,
+            bg_color=settings.theme.items.color.secondary
+        )
         self.addWidget(window)
         
         window[None] = TitleBar(self, height=50, logo_image="icon.svg")
 
-        window[None] = container = Container(bg_color=theme.bg_two, cstretch=[0], rstretch=[2])
+        window[None] = container = Container(
+            bg_color=settings.theme.background.frames,
+            cstretch=[0],
+            rstretch=[2],
+            spacing=4
+        )
 
         container[0, 0] = self.button = Button(text="Load json data", height=50)
         container[1, 0, 2, 1] = self.weight_min_max = DataFrame[AlignTop](maxlen=3, numeric=True)

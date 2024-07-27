@@ -1,6 +1,6 @@
 from PyQt6.QtGui import QKeyEvent
 from . import Component, QKeyEvent, QLineEdit, QTimer, QColor, QPainter, QIntValidator, Qt
-from .settings import theme
+from .settings import settings
 
 
 class Editor(QLineEdit, metaclass=Component):
@@ -11,9 +11,9 @@ class Editor(QLineEdit, metaclass=Component):
 		maxlen=10,
 		caret_width=2,
 		placeholder="",
-		color=theme.text_foreground,
-		selection_color=theme.context_color,
-		bg_color=theme.bg_two,
+		color=settings.theme.text.color.description,
+		selection_color=settings.theme.items.color.context,
+		bg_color=settings.theme.background.frames,
 	):
 		super().__init__(parent=parent)
 		if numeric:

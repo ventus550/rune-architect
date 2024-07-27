@@ -1,0 +1,5 @@
+QMessageBox QLabel {
+	font: 16pt (font);
+	color: (color);
+	text-align: center;
+}
