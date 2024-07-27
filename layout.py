@@ -9,12 +9,7 @@ from gui.components import (
     QSizePolicy,
 )
 from gui.components.alignment import *
-from gui.components.settings import theme, settings
-from itertools import product
-
-import numpy, pandas
-
-data = pandas.DataFrame(numpy.random.randint(0, 100, (12, 3)), columns=["Weight", "Min", "Max"])
+from gui.components.settings import theme
 
 
 class ApplicationLayout(ApplicationWindow):
@@ -23,7 +18,7 @@ class ApplicationLayout(ApplicationWindow):
         window: Container = Container(shadow=True, margin=10, spacing=10, bg_color=theme.bg_one)
         self.addWidget(window)
         
-        window[None] = TitleBar(self, height=50)
+        window[None] = TitleBar(self, height=50, logo_image="icon.svg")
 
         window[None] = container = Container(bg_color=theme.bg_two, cstretch=[0], rstretch=[2])
 
@@ -45,5 +40,5 @@ class ApplicationLayout(ApplicationWindow):
         runesets[None] = self.runesets_selectors[2]
         
         
-        container[2, 0, 1, 2] = self.results = DataFrame(data, editable=False)
+        container[2, 0, 1, 2] = self.results = DataFrame(editable=False)
         self.results.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)

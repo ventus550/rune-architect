@@ -4,7 +4,6 @@ from ..data import transform
 from ..data.schema import *
 from ..data.mapping.runes import synergies
 from .model import Model
-import time
 
 class Optimizer(QThread):
 	finished = pyqtSignal(object)
@@ -28,7 +27,7 @@ class Optimizer(QThread):
 		self.finished.connect(func)
 		self.start()
 
-	def run(self):
+	def optimize(self):
 		sparse_runes = transform.sparse_rune_sets(self.runes)
 		sparse_flat_runes = transform.flatten_runes(sparse_runes, self.monster)
 		flat_synergies = transform.flatten_synergies(synergies, self.monster)
@@ -43,12 +42,14 @@ class Optimizer(QThread):
 		solution = model.solve()
 		if solution["status"] == LpStatusInfeasible:
 			return None
-		self.finished.emit(self.runes.loc[
+		return self.runes.loc[
 			[
 				model.items2runes[var][0]
 				for var in solution["variables"]
 				if value(var) and var in model.items2runes # value(var) may happen to be none
 			]
-		])
+		]
 
-
+	def run(self):
+		solution = self.optimize()
+		self.finished.emit(solution)
