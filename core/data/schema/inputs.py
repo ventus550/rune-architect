@@ -1,5 +1,5 @@
-from pandera import *
-from pandera.typing import *
+from pandera import DataFrameModel, Field
+from pandera.typing import Series, Index
 from .. import mapping
 
 

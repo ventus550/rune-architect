@@ -31,7 +31,7 @@ class ApplicationLayout(ApplicationWindow):
         container[1, 0, 2, 1] = self.weight_min_max = DataFrame[AlignTop](maxlen=3, numeric=True)
     
         container[0, 1] = environment = Container[AlignTop](cstretch=0, margin=4, spacing=10)
-        environment[0, 0] = self.monster_selector = Dropdown(width=200)
+        environment[0, 0] = self.monster_selector = Dropdown(width=300)
         environment[0, 1] = self.allow_equipped_checkbox = CheckBox("Equipped")
 
         container[1, 1] = runesets = Container[AlignTop](margin=5, spacing=4)
@@ -46,4 +46,4 @@ class ApplicationLayout(ApplicationWindow):
         
         
         container[2, 0, 1, 2] = self.results = DataFrame(data, editable=False)
-        self.results.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.MinimumExpanding)
+        self.results.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
