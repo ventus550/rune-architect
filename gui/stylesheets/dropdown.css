@@ -5,7 +5,11 @@ QComboBox {
 	border: 1px solid (button_border_color);
 	border-radius: (button_border_radius)px;
 	padding: 5px;
-	margin: 5px;
+	/* margin: 5px; */
+}
+
+QComboBox:hover {
+	color: (selection_color);
 }
 
 QComboBox::drop-down {

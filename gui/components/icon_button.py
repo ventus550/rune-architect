@@ -11,7 +11,8 @@ class IconButton(QPushButton):
         height=30,
         radius=8,
         bg_color=settings.theme.background.frames,
-        icon_color="#c3ccdf",
+        icon_color=settings.theme.background.container,
+        icon_active=settings.theme.items.color.primary,
         icon_path="no_icon.svg",
     ):
         super().__init__()
@@ -24,9 +25,8 @@ class IconButton(QPushButton):
         self.bg_color_hover = adjust_brightness(bg_color, 1.1)
         self.bg_color_pressed = adjust_brightness(bg_color, 0.9)
         self.icon_color = icon_color
-        self.icon_color_hover = adjust_brightness(icon_color, 1.2)
-        self.icon_color_pressed = adjust_brightness(icon_color, 1.1)
-        self.icon_color_active = adjust_brightness(bg_color, 11)
+        self.icon_color_hover = adjust_brightness(icon_active, 1.2)
+        self.icon_color_pressed = adjust_brightness(icon_active, 1.1)
 
         self.set_bg_color = bg_color
         self.set_icon_path = icon_path

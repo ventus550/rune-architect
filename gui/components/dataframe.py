@@ -7,6 +7,7 @@ from . import (
     QStyledItemDelegate,
     Qt,
     QHeaderView,
+    QSize,
 )
 from .alignment import *
 import numpy
@@ -36,6 +37,7 @@ class Delegate(QStyledItemDelegate):
             numeric=self.numeric,
             placeholder=self.placeholder,
             maxlen=self.maxlen,
+            bg_color="transparent"
         )
 
     def setEditorData(self, editor, index):
@@ -63,8 +65,11 @@ class DataFrame(QTableWidget, metaclass=Component):
         flexible_rows=False,
         maxlen=10,
         editable=True,
-        radius=8,
-        bg_color="transparent",
+        row_height=30,
+        padding=10,
+        radius=settings.theme.items.radius,
+        # bg_color="transparent",
+        bg_color=settings.theme.items.color.headers,
         color=settings.theme.text.color.description,
         selection_color=settings.theme.items.color.primary,
         header_horizontal_color=settings.theme.items.color.headers,
@@ -75,16 +80,19 @@ class DataFrame(QTableWidget, metaclass=Component):
         scrollbar_color=settings.theme.items.color.primary,
     ):
         QTableWidget.__init__(self)
+        self.padding = padding
         # Horizontal header (labels) settings
         self.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.horizontalHeader().setSectionsClickable(False)
-        self.horizontalHeader().setMinimumHeight(30)
+        self.horizontalHeader().setMaximumHeight(row_height)
+        self.horizontalHeader().setStyleSheet(f"background-color: {bg_color};")
 
         # Vertical header (index) settings
         if not flexible_rows:
             self.verticalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
+        self.verticalHeader().setStyleSheet(f"background-color: {bg_color};")
         self.verticalHeader().setSectionsClickable(False)
-        self.verticalHeader().setMinimumSectionSize(30)
+        self.verticalHeader().setMinimumSectionSize(row_height)
 
         # Window settings
         self.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
@@ -103,8 +111,13 @@ class DataFrame(QTableWidget, metaclass=Component):
         for row, col in product(range(rows), range(cols)):
             text = self.item(row, col).text()
 
-            matrix[row][col] = text if text else None  # pandas.NA
+            matrix[row][col] = text if text else None
         return pandas.DataFrame(matrix, columns=self.label, index=self.index)
+    
+    def sizeHint(self):
+        if self.rowCount() == 0:
+            return QSize(self.width(), 0)
+        return QSize(self.width(), (self.rowCount() + 1) * (self.rowHeight(0) + 1))
 
     @data.setter
     def data(self, df: pandas.DataFrame):
