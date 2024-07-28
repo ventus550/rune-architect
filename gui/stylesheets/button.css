@@ -3,7 +3,7 @@ QPushButton {
     padding-left: 10px;
     padding-right: 5px;
     border-radius: (border_radius)px;
-    margin: 7px;
+    /* margin: 7px; */
     background-color: (bg_color);
     color: (color);
     font-size: (font_size)px;
@@ -17,4 +17,5 @@ QPushButton:pressed {
 QPushButton:disabled {
     background-color: transparent;
     border: 3px solid (bg_color);
+    color: (bg_color)
 }

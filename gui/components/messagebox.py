@@ -19,9 +19,8 @@ class MessageBox(QMessageBox, metaclass=Component):
         self.setText(text)
         self.setWindowTitle("Message")
 
-        self.button = Button("Close", height=50, width=200)
+        self.button = Button("Close", height=40, width=200)
         self.button.clicked.connect(self.accept)
-
         self.layout().addWidget(
-            self.button, 1, 1, alignment=Qt.AlignmentFlag.AlignCenter
+            self.button, 2, 1, alignment=Qt.AlignmentFlag.AlignCenter
         )

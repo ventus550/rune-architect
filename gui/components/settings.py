@@ -4,9 +4,9 @@ from pathlib import Path
 class settings:
     class application:
         name = "Rune Architect"
-        height = 650
-        width = 1200
-        margin = 20
+        height = 700
+        width = 1400
+        margin = 30
         icon = "icon.ico"
         logo = "logo.asvg"
         font = "recharge.otf"
@@ -14,19 +14,18 @@ class settings:
     class directories:
         stylesheets = Path("gui/stylesheets")
         assets = Path("gui/assets")
-
     class theme:
         class background:
-            container = "#2c313c"
-            frames = "#343b48"
+            container = "#1e2229"
+            frames = "#f5f6f9"
 
         class text:
             family = "recharge"
 
             class size:
                 large = 16
-                medium = 12
-                normal = 10
+                medium = 14
+                normal = 12
 
             class color:
                 important = "#f5f6f9"
@@ -38,5 +37,5 @@ class settings:
             radius = 5
 
             class color:
-                primary = "#568af2"
+                primary = "#8c0101"
                 headers = "#1e2229"

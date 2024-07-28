@@ -7,6 +7,7 @@ from gui.components import (
 	Dropdown,
     CheckBox,
     QSizePolicy,
+    Qt
 )
 from gui.components.alignment import *
 from gui.components.settings import settings
@@ -17,7 +18,7 @@ class ApplicationLayout(Window):
         super().__init__(**kwargs)
         window: Container = Container(
             shadow=True,
-            margin=10,
+            margin=5,
             spacing=10,
             bg_color=settings.theme.background.container
         )
@@ -29,18 +30,20 @@ class ApplicationLayout(Window):
             bg_color=settings.theme.background.frames,
             cstretch=[0],
             rstretch=[3],
-            spacing=4,
+            spacing=20,
             margin=settings.application.margin
         )
 
-        container[0, 0] = self.button = Button(text="Load json data", height=50)
+        container[0, 0] = self.button = Button(text="Load json data", height=40)
+        
         container[1, 0, 2, 1] = self.weight_min_max = DataFrame[AlignTop](maxlen=3, numeric=True)
+        self.weight_min_max.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
     
-        container[0, 1] = environment = Container[AlignTop](cstretch=0, margin=4, spacing=10)
+        container[0, 1] = environment = Container[AlignCenter](cstretch=0, margin=0, spacing=10)
         environment[0, 0] = self.monster_selector = Dropdown(width=300)
         environment[0, 1] = self.allow_equipped_checkbox = CheckBox("Equipped")
 
-        container[1, 1] = runesets = Container[AlignTop](margin=5, spacing=4)
+        container[1, 1] = runesets = Container[AlignTop](margin=0, spacing=15)
         self.runesets_selectors = [
             Dropdown(),
             Dropdown(),
@@ -51,7 +54,7 @@ class ApplicationLayout(Window):
         runesets[None] = self.runesets_selectors[2]
 
         container[2, 0, 1, 2] = self.summary = DataFrame[AlignTop](editable=False)
-        self.summary.setMaximumHeight(80)
+        self.summary.verticalHeader().setVisible(False)
 
         container[3, 0, 1, 2] = self.results = DataFrame(editable=False)
         self.results.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)

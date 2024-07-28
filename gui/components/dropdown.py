@@ -32,7 +32,7 @@ class Dropdown(QComboBox, metaclass=Component):
                 border: none;
                 border-radius: 8px;
                 margin: 4px;
-                margin-top: 0px;
+                margin-top: 10px;
             }"""
         )
 
