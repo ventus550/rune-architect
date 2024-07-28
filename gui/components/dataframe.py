@@ -64,15 +64,15 @@ class DataFrame(QTableWidget, metaclass=Component):
         maxlen=10,
         editable=True,
         radius=8,
-        color=settings.theme.text.color.description,
-        selection_color=settings.theme.items.color.context,
         bg_color="transparent",
-        header_horizontal_color=settings.theme.background.other,
-        header_vertical_color=settings.theme.background.other,
-        bottom_line_color=settings.theme.items.color.secondary,
-        grid_line_color=settings.theme.items.color.secondary,
-        scroll_bar_bg_color=settings.theme.items.color.secondary,
-        context_color=settings.theme.items.color.context,
+        color=settings.theme.text.color.description,
+        selection_color=settings.theme.items.color.primary,
+        header_horizontal_color=settings.theme.items.color.headers,
+        header_vertical_color=settings.theme.items.color.headers,
+        bottom_line_color=settings.theme.background.container,
+        grid_line_color=settings.theme.background.container,
+        scroll_bar_bg_color=settings.theme.background.container,
+        scrollbar_color=settings.theme.items.color.primary,
     ):
         QTableWidget.__init__(self)
         # Horizontal header (labels) settings
@@ -131,7 +131,7 @@ class DataFrame(QTableWidget, metaclass=Component):
                 self.model().setData(index, "")  # Clear cell data
                 self.edit(index)  # Enter edit mode
         super().mousePressEvent(event)
-    
+
     def mouseDoubleClickEvent(self, event):
         if self.editable:
             super().mouseDoubleClickEvent(event)

@@ -37,7 +37,7 @@ class CentralWidget(QWidget, metaclass=Component):
             return
 
 
-class ApplicationWindow(QMainWindow):
+class Window(QMainWindow):
     def __init__(
         self,
         minw=settings.application.width,

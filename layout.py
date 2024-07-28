@@ -1,5 +1,5 @@
 from gui.components import (
-	ApplicationWindow,
+	Window,
 	Container,
 	TitleBar,
 	DataFrame,
@@ -12,14 +12,14 @@ from gui.components.alignment import *
 from gui.components.settings import settings
 
 
-class ApplicationLayout(ApplicationWindow):
+class ApplicationLayout(Window):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         window: Container = Container(
             shadow=True,
             margin=10,
             spacing=10,
-            bg_color=settings.theme.items.color.secondary
+            bg_color=settings.theme.background.container
         )
         self.addWidget(window)
         
@@ -29,7 +29,8 @@ class ApplicationLayout(ApplicationWindow):
             bg_color=settings.theme.background.frames,
             cstretch=[0],
             rstretch=[2],
-            spacing=4
+            spacing=4,
+            margin=settings.application.margin
         )
 
         container[0, 0] = self.button = Button(text="Load json data", height=50)

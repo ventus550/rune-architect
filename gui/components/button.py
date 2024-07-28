@@ -1,7 +1,8 @@
 from . import Component, QPushButton, Qt
 from .settings import settings
+from .hex import adjust_brightness
 
-
+bg_color = settings.theme.items.color.primary
 class Button(QPushButton, metaclass=Component):
     def __init__(
         self,
@@ -9,9 +10,11 @@ class Button(QPushButton, metaclass=Component):
         height=None,
         width=None,
         color=settings.theme.text.color.important,
-        bg_color=settings.theme.items.color.context,
-        bg_hover_color=settings.theme.items.color.hover,
-        bg_pressed_color=settings.theme.items.color.press,
+        bg_color=bg_color,
+        bg_hover_color=adjust_brightness(bg_color, 1.2),
+        bg_pressed_color=adjust_brightness(bg_color, 0.8),
+        font_size=settings.theme.text.size.large,
+        border_radius=settings.theme.items.radius,
         **kwargs
     ):
         super().__init__(text=text, **kwargs)

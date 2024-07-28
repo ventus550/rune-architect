@@ -12,7 +12,7 @@ class Editor(QLineEdit, metaclass=Component):
 		caret_width=2,
 		placeholder="",
 		color=settings.theme.text.color.description,
-		selection_color=settings.theme.items.color.context,
+		selection_color=settings.theme.items.color.primary,
 		bg_color=settings.theme.background.frames,
 	):
 		super().__init__(parent=parent)

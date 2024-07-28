@@ -10,8 +10,7 @@ class CheckBox(QCheckBox, metaclass=Component):
         border_color=settings.theme.text.color.description,
         color=settings.theme.text.color.description,
         bg_unchecked_color="transparent",
-        bg_checked_color=settings.theme.items.color.context,
+        bg_checked_color=settings.theme.items.color.primary,
     ):
         super().__init__(text=text)
         self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-

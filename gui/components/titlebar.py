@@ -26,16 +26,12 @@ class TitleBar(QWidget):
         parent,
         logo_image="no_icon.svg",
         height=60,
-        bg_color="#343b48",
-        btn_bg_color="#343b48",
-        btn_bg_color_hover="#3c4454",
-        btn_bg_color_pressed="#2c313c",
-        icon_color_hover="#dce1ec",
-        icon_color_pressed="#edf0f5",
-        icon_color_active="#f5f6f9",
-        context_color="#6c99f4",
-        radius=8,
-        title_size=12,
+        bg_color=settings.theme.background.frames,
+        btn_bg_color=settings.theme.background.frames,
+        btn_bg_color_pressed=settings.theme.background.container,
+        icon_color_active=settings.theme.text.color.important,
+        radius=settings.theme.items.radius,
+        title_size=settings.theme.text.size.normal,
         title=settings.application.name,
     ):
         super().__init__()
@@ -44,11 +40,7 @@ class TitleBar(QWidget):
         self.parent = parent
         self.logo_image = logo_image
         self.btn_bg_color = btn_bg_color
-        self.btn_bg_color_hover = btn_bg_color_hover
         self.btn_bg_color_pressed = btn_bg_color_pressed
-        self.context_color = context_color
-        self.icon_color_hover = icon_color_hover
-        self.icon_color_pressed = icon_color_pressed
         self.icon_color_active = icon_color_active
         self.title_size = title_size
         self.title = title
@@ -167,20 +159,10 @@ class TitleBar(QWidget):
         self.custom_buttons_layout.setContentsMargins(0, 0, 0, 0)
         self.custom_buttons_layout.setSpacing(3)
 
-        button_style = dict(
-            bg_color=self.btn_bg_color,
-            bg_color_hover=self.btn_bg_color_hover,
-            bg_color_pressed=self.btn_bg_color_pressed,
-            icon_color_hover=self.icon_color_hover,
-            icon_color_pressed=self.icon_color_pressed,
-            icon_color_active=self.icon_color_active,
-            context_color=self.context_color,
-            radius=6,
-        )
-
         # MINIMIZE BUTTON
         self.minimize_button = IconButton(
-            **button_style,
+            bg_color=self.btn_bg_color,
+            radius=6,
             icon_path=str(settings.directories.assets / "icon_minimize.svg"),
         )
         self.bg_layout.addWidget(self.minimize_button)
@@ -188,7 +170,8 @@ class TitleBar(QWidget):
 
         # MAXIMIZE / RESTORE BUTTON
         self.maximize_restore_button = IconButton(
-            **button_style,
+            bg_color=self.btn_bg_color,
+            radius=6,
             icon_path=str(settings.directories.assets / "icon_maximize.svg"),
         )
         self.bg_layout.addWidget(self.maximize_restore_button)
@@ -196,7 +179,8 @@ class TitleBar(QWidget):
 
         # CLOSE BUTTON
         self.close_button = IconButton(
-            **button_style,
+            bg_color=self.btn_bg_color,
+            radius=6,
             icon_path=str(settings.directories.assets / "icon_close.svg"),
         )
         self.bg_layout.addWidget(self.close_button)

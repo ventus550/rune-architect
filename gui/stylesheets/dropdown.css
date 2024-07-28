@@ -3,7 +3,7 @@ QComboBox {
 	background-color: (button_background_color);
 	color: (button_color);
 	border: 1px solid (button_border_color);
-	border-radius: 5px;
+	border-radius: (button_border_radius)px;
 	padding: 5px;
 	margin: 5px;
 }
@@ -28,7 +28,7 @@ QComboBox::down-arrow {
 QComboBox QAbstractItemView {
 	background-color: (menu_background_color);
 	color: (menu_color);
-	border-radius: 10px;
+	border-radius: (button_border_radius)px;
 	padding: 20px;
 	selection-background-color: (selection_background_color);
 	selection-color: (selection_color);

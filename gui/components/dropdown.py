@@ -13,13 +13,14 @@ class Dropdown(QComboBox, metaclass=Component):
         self,
         parent=None,
         width=None,
-        button_background_color=settings.theme.items.color.secondary,
-        button_color=settings.theme.text.color.description,
         button_border_color="transparent",
-        menu_background_color=settings.theme.background.frames,
+        button_border_radius=settings.theme.items.radius,
+        button_background_color=settings.theme.background.container,
+        button_color=settings.theme.text.color.description,
+        menu_background_color=settings.theme.items.color.headers,
         menu_color=settings.theme.text.color.description,
-        selection_background_color=settings.theme.background.containers,
-        selection_color=settings.theme.items.color.context,
+        selection_background_color= settings.theme.background.frames,
+        selection_color=settings.theme.items.color.primary,
         arrow_icon_url=f"url({settings.directories.assets / "icon_menu.svg"})"
     ):
         super().__init__(parent)
