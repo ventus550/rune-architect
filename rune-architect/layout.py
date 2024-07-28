@@ -36,7 +36,7 @@ class ApplicationLayout(Window):
 
         container[0, 0] = self.button = Button(text="Load json data", height=40)
         
-        container[1, 0, 2, 1] = self.weight_min_max = DataFrame[AlignTop](maxlen=3, numeric=True)
+        container[1, 0, 2, 1] = self.weight_min_max = DataFrame[AlignTop](maxlen=5, numeric=True)
         self.weight_min_max.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
     
         container[0, 1] = environment = Container[AlignCenter](cstretch=0, margin=0, spacing=10)

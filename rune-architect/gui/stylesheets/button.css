@@ -3,7 +3,7 @@ QPushButton {
     padding-left: 10px;
     padding-right: 5px;
     border-radius: (border_radius)px;
-    /* margin: 7px; */
+    margin: (margin)px;
     background-color: (bg_color);
     color: (color);
     font-size: (font_size)px;

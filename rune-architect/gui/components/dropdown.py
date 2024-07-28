@@ -21,7 +21,7 @@ class Dropdown(QComboBox, metaclass=Component):
         menu_color=settings.theme.text.color.description,
         selection_background_color= settings.theme.background.frames,
         selection_color=settings.theme.items.color.primary,
-        arrow_icon_url=f"url({settings.directories.assets / "icon_menu.svg"})"
+        arrow_icon_url=f"url({(settings.directories.assets / "icon_menu.svg").as_posix()})"
     ):
         super().__init__(parent)
         self.view().window().setStyleSheet("border-radius: 10px;")

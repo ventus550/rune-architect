@@ -22,10 +22,10 @@ def named_monster_runes_view(runes: DataFrame[Runes], monsters: DataFrame[Monste
 @check_types
 def flatten_runes(runes: DataFrame[Runes], selected_monsters: DataFrame[Monsters]) -> DataFrame[FlatRunes]:
 	monster = selected_monsters.iloc[0]
-	runes["hp"] += runes["hp%"] * monster["hp"]
-	runes["spd"] += runes["spd%"] * monster["spd"]
-	runes["def"] += runes["def%"] * monster["def"]
-	runes["atk"] += runes["atk%"] * monster["atk"]
+	runes["hp"] += runes["hp%"] * monster["hp"] // 100
+	runes["spd"] += runes["spd%"] * monster["spd"] // 100
+	runes["def"] += runes["def%"] * monster["def"] // 100
+	runes["atk"] += runes["atk%"] * monster["atk"] // 100
 	return runes.drop(columns=runes.filter(regex='%$').columns)
 
 @check_types
@@ -39,7 +39,7 @@ def flatten_synergies(synergies: DataFrame[Synergies], selected_monsters: DataFr
 			
 			effect = effect[:-1]
 			row.effect = effect
-			row.value = int(row.value * monster[effect]/100)
+			row.value = row.value * monster[effect] // 100
 		return row
 
 	return synergies.apply(flatten, axis=1).convert_dtypes()

@@ -4,7 +4,7 @@ from pathlib import Path
 class settings:
     class application:
         name = "Rune Architect"
-        height = 700
+        height = 660
         width = 1400
         margin = 30
         icon = "icon.ico"

@@ -16,7 +16,7 @@ empty = "Empty"
 
 class Application(ApplicationLayout):
     def __init__(self):
-        super().__init__(minw=1200)
+        super().__init__()
         self.json = None
         self.monsters: DataFrame[Monsters] = None
         self.runes: DataFrame[Runes] = None

@@ -34,7 +34,10 @@ QComboBox QAbstractItemView {
 	color: (menu_color);
 	border-radius: (button_border_radius)px;
 	padding: 20px;
-	selection-background-color: (selection_background_color);
-	selection-color: (selection_color);
 	outline: 0;
+}
+
+QAbstractItemView::item:selected {
+    color: (selection_color);
+    background-color: (selection_background_color);
 }

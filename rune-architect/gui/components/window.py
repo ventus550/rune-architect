@@ -48,6 +48,7 @@ class Window(QMainWindow):
         self.sysapp.setQuitOnLastWindowClosed(True)
         self.sysapp.setWindowIcon(QIcon(str(settings.directories.assets / "icon.ico")))
         self.sysapp.setApplicationName(name)
+        self.sysapp.setEffectEnabled(Qt.UIEffect.UI_AnimateCombo, False);
         self.drag_position: QPoint = None
 
         super().__init__()

@@ -9,6 +9,7 @@ class Button(QPushButton, metaclass=Component):
         text="Button",
         height=None,
         width=None,
+        margin=0,
         color=settings.theme.text.color.important,
         bg_color=bg_color,
         bg_hover_color=adjust_brightness(bg_color, 1.2),
