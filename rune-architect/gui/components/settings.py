@@ -12,8 +12,8 @@ class settings:
         font = "recharge.otf"
 
     class directories:
-        stylesheets = Path("gui/stylesheets")
-        assets = Path("gui/assets")
+        stylesheets = Path("rune-architect/gui/stylesheets")
+        assets = Path("rune-architect/gui/assets")
     class theme:
         class background:
             container = "#1e2229"

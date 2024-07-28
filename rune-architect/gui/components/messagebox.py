@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtCore import Qt
-from gui.components import Component, Button
+from . import Component, Button
 from .settings import settings
 
 

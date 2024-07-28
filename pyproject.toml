@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "rune-architect"
+version = "0.1.0"
+description = "Summoners war rune optimization app"
+authors = ["Me <ventuss550@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyqt6 = "^6.7.1"
+pandas = "^2.2.2"
+pandera = "^0.20.3"
+pulp = "^2.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

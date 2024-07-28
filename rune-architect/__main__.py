@@ -1,11 +1,11 @@
 from PyQt6.QtWidgets import QFileDialog
 from collections import Counter
 import pandas
-from layout import ApplicationLayout
-from gui.components import MessageBox
-from core.data import mapping, extract, transform
-from core.data.schema import WeightMinMax, DataFrame, Monsters, Runes
-from core.optimizer import Optimizer
+from .layout import ApplicationLayout
+from .gui.components import MessageBox
+from .core.data import mapping, extract, transform
+from .core.data.schema import WeightMinMax, DataFrame, Monsters, Runes
+from .core.optimizer import Optimizer
 
 flat_effects = [eff for eff in mapping.runes.effects.values() if not eff.endswith("%")]
 data = pandas.DataFrame(

@@ -1,4 +1,4 @@
-from gui.components import (
+from .gui.components import (
 	Window,
 	Container,
 	TitleBar,
@@ -9,8 +9,8 @@ from gui.components import (
     QSizePolicy,
     Qt
 )
-from gui.components.alignment import *
-from gui.components.settings import settings
+from .gui.components.alignment import *
+from .gui.components.settings import settings
 
 
 class ApplicationLayout(Window):

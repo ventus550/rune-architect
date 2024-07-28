@@ -1,6 +1,6 @@
 from pandera import DataFrameModel, Field
 from pandera.typing import Series, Index
-from core.data import mapping
+from .. import mapping
 
 
 class Monsters(DataFrameModel):
