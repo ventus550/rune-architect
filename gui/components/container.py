@@ -6,6 +6,7 @@ from . import (
     QLayout,
     QGridLayout,
     QSizePolicy,
+    settings,
 )
 
 
@@ -18,9 +19,8 @@ class Container(QFrame, metaclass=Component):
         shadow=False,
         rstretch=[],
         cstretch=[],
-        # STYLESHEET
-        border_radius=10,
-        border_size=2,
+        border_radius=settings.theme.items.radius,
+        # border_size=2,
         bg_color="transparent",
         border_color="transparent",
     ):

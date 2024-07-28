@@ -1,5 +1,5 @@
 from . import Component, QCheckBox, QCursor, Qt
-from .settings import theme
+from .settings import settings
 
 
 class CheckBox(QCheckBox, metaclass=Component):
@@ -7,11 +7,10 @@ class CheckBox(QCheckBox, metaclass=Component):
         self,
         text="",
         border_width=2,
-        border_color=theme.text_foreground,
-        color=theme.text_foreground,
+        border_color=settings.theme.text.color.description,
+        color=settings.theme.text.color.description,
         bg_unchecked_color="transparent",
-        bg_checked_color=theme.context_color,
+        bg_checked_color=settings.theme.items.color.primary,
     ):
         super().__init__(text=text)
         self.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-

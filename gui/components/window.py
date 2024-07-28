@@ -9,23 +9,24 @@ from . import (
     QFontDatabase,
     QIcon,
 )
-from .settings import theme, settings
+from .settings import settings
 import sys
 
 
 class CentralWidget(QWidget, metaclass=Component):
     def __init__(
         self,
-        text_size=theme.text_size,
-        font_family=theme.font_family,
-        text_foreground=theme.text_foreground,
+        text_size=settings.theme.text.size.normal,
+        font_family=settings.theme.text.family,
+        text_foreground=settings.theme.text.color.description,
     ) -> None:
         super().__init__()
         self.layout: QVBoxLayout = QVBoxLayout(self)
         self.addWidget = self.layout.addWidget
 
-        # move somewhere else?
-        font_id = QFontDatabase.addApplicationFont(str(settings.font_path))
+        font_id = QFontDatabase.addApplicationFont(
+            str(settings.directories.assets / settings.application.font)
+        )
         if font_id == -1:
             print("Failed to load the custom font.")
             return
@@ -36,11 +37,16 @@ class CentralWidget(QWidget, metaclass=Component):
             return
 
 
-class ApplicationWindow(QMainWindow):
-    def __init__(self, minw=800, minh=600, name="ApplicationName") -> None:
+class Window(QMainWindow):
+    def __init__(
+        self,
+        minw=settings.application.width,
+        minh=settings.application.height,
+        name=settings.application.name,
+    ) -> None:
         self.sysapp = QApplication(sys.argv)
         self.sysapp.setQuitOnLastWindowClosed(True)
-        self.sysapp.setWindowIcon(QIcon(str(settings.assets_directory / "icon.ico")))
+        self.sysapp.setWindowIcon(QIcon(str(settings.directories.assets / "icon.ico")))
         self.sysapp.setApplicationName(name)
         self.drag_position: QPoint = None
 

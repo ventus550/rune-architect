@@ -12,7 +12,7 @@ from .alignment import *
 import numpy
 import pandas
 from itertools import product
-from .settings import theme
+from .settings import settings
 
 
 class Delegate(QStyledItemDelegate):
@@ -22,7 +22,7 @@ class Delegate(QStyledItemDelegate):
         numeric=False,
         maxlen=10,
         placeholder="",
-        bg_color=theme.bg_two,
+        bg_color=settings.theme.background.frames,
     ):
         super().__init__(parent)
         self.maxlen = maxlen
@@ -64,16 +64,15 @@ class DataFrame(QTableWidget, metaclass=Component):
         maxlen=10,
         editable=True,
         radius=8,
-        color=theme.text_foreground,
-        selection_color=theme.context_color,
         bg_color="transparent",
-        header_horizontal_color=theme.dark_two,
-        header_vertical_color=theme.dark_two,
-        bottom_line_color=theme.bg_three,
-        grid_line_color=theme.bg_one,
-        scroll_bar_bg_color=theme.bg_one,
-        scroll_bar_btn_color=theme.dark_four,
-        context_color=theme.context_color,
+        color=settings.theme.text.color.description,
+        selection_color=settings.theme.items.color.primary,
+        header_horizontal_color=settings.theme.items.color.headers,
+        header_vertical_color=settings.theme.items.color.headers,
+        bottom_line_color=settings.theme.background.container,
+        grid_line_color=settings.theme.background.container,
+        scroll_bar_bg_color=settings.theme.background.container,
+        scrollbar_color=settings.theme.items.color.primary,
     ):
         QTableWidget.__init__(self)
         # Horizontal header (labels) settings
@@ -132,3 +131,7 @@ class DataFrame(QTableWidget, metaclass=Component):
                 self.model().setData(index, "")  # Clear cell data
                 self.edit(index)  # Enter edit mode
         super().mousePressEvent(event)
+
+    def mouseDoubleClickEvent(self, event):
+        if self.editable:
+            super().mouseDoubleClickEvent(event)
