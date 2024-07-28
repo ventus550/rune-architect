@@ -28,7 +28,7 @@ class ApplicationLayout(Window):
         window[None] = container = Container(
             bg_color=settings.theme.background.frames,
             cstretch=[0],
-            rstretch=[2],
+            rstretch=[3],
             spacing=4,
             margin=settings.application.margin
         )
@@ -49,7 +49,9 @@ class ApplicationLayout(Window):
         runesets[None] = self.runesets_selectors[0]
         runesets[None] = self.runesets_selectors[1]
         runesets[None] = self.runesets_selectors[2]
-        
-        
-        container[2, 0, 1, 2] = self.results = DataFrame(editable=False)
+
+        container[2, 0, 1, 2] = self.summary = DataFrame[AlignTop](editable=False)
+        self.summary.setMaximumHeight(80)
+
+        container[3, 0, 1, 2] = self.results = DataFrame(editable=False)
         self.results.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
