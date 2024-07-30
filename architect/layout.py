@@ -7,6 +7,7 @@ from .gui.components import (
 	Dropdown,
     CheckBox,
     QSizePolicy,
+    QTableWidget,
     Qt
 )
 from .gui.components.alignment import *
@@ -41,7 +42,8 @@ class ApplicationLayout(Window):
         environment[0, 1] = self.allow_equipped_checkbox = CheckBox("Equipped")
         
         container[1, 0] = self.weight_min_max = DataFrame[AlignTop](maxlen=5, numeric=True)
-        # self.weight_min_max.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.weight_min_max.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.weight_min_max.scrollContentsBy = lambda *args: None
 
         container[1, 1] = runesets = Container[AlignVCenter](margin=0, spacing=15)
         self.runesets_selectors = [
