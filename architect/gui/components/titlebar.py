@@ -11,7 +11,7 @@ from . import (
     QSvgWidget,
 )
 from .alignment import *
-from .settings import settings
+from ...settings import settings
 
 _is_maximized = False
 _old_size = QSize()

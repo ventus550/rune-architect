@@ -8,7 +8,7 @@ from PyQt6.QtSvgWidgets import *
 from . import alignment
 
 # Custom components
-from .settings import settings
+from ...settings import settings
 from .component import Component
 from .window import Window
 from .container import Container

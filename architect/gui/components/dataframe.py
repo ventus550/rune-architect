@@ -13,7 +13,7 @@ from .alignment import *
 import numpy
 import pandas
 from itertools import product
-from .settings import settings
+from ...settings import settings
 
 
 class Delegate(QStyledItemDelegate):

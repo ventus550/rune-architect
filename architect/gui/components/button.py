@@ -1,5 +1,5 @@
 from . import Component, QPushButton, Qt
-from .settings import settings
+from ...settings import settings
 from .hex import adjust_brightness
 
 bg_color = settings.theme.items.color.primary

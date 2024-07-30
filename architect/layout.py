@@ -10,7 +10,7 @@ from .gui.components import (
     Qt
 )
 from .gui.components.alignment import *
-from .gui.components.settings import settings
+from .settings import settings
 
 
 class ApplicationLayout(Window):

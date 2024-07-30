@@ -1,6 +1,6 @@
 from PyQt6.QtGui import QKeyEvent
 from . import Component, QKeyEvent, QLineEdit, QTimer, QColor, QPainter, QIntValidator, Qt
-from .settings import settings
+from ...settings import settings
 
 
 class Editor(QLineEdit, metaclass=Component):

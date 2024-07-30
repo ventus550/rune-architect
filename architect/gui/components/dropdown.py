@@ -5,7 +5,7 @@ from . import (
     QComboBox,
     QGraphicsDropShadowEffect,
 )
-from .settings import settings
+from ...settings import settings
 
 
 class Dropdown(QComboBox, metaclass=Component):

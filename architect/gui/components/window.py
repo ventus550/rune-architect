@@ -9,7 +9,7 @@ from . import (
     QFontDatabase,
     QIcon,
 )
-from .settings import settings
+from ...settings import settings
 import sys
 
 

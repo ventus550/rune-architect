@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QMessageBox, QWidget
 from PyQt6.QtCore import Qt
 from . import Component, Button
-from .settings import settings
+from ...settings import settings
 
 
 class MessageBox(QMessageBox, metaclass=Component):

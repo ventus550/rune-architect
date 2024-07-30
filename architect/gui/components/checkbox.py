@@ -1,5 +1,5 @@
 from . import Component, QCheckBox, QCursor, Qt
-from .settings import settings
+from ...settings import settings
 
 
 class CheckBox(QCheckBox, metaclass=Component):

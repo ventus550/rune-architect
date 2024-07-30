@@ -3,7 +3,7 @@ import inspect
 from contextlib import suppress
 from pathlib import Path
 from . import QWidget
-from .settings import settings
+from ...settings import settings
 
 
 class Component(type(QWidget)):
