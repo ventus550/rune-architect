@@ -9,3 +9,7 @@ QCheckBox::indicator:checked {
 	border: none;
 	border-radius: 3px;
 }
+
+QCheckBox::indicator:focus {
+	outline: none;
+}

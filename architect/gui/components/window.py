@@ -8,9 +8,13 @@ from . import (
     QPoint,
     QFontDatabase,
     QIcon,
+    QRect,
+    QPropertyAnimation,
 )
 from ...settings import settings
 import sys
+import ctypes
+from contextlib import suppress
 
 
 class CentralWidget(QWidget, metaclass=Component):
@@ -50,6 +54,10 @@ class Window(QMainWindow):
         self.sysapp.setApplicationName(name)
         self.sysapp.setEffectEnabled(Qt.UIEffect.UI_AnimateCombo, False);
         self.drag_position: QPoint = None
+        self.fullscreen = False
+        with suppress(AttributeError):
+            # set application group icon for windows
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(name)
 
         super().__init__()
         self.setWindowTitle(name)
@@ -75,6 +83,13 @@ class Window(QMainWindow):
         frame_geometry = self.frameGeometry()
         frame_geometry.moveCenter(center_point)
         self.move(frame_geometry.topLeft())
+
+    def toogle_fullscreen(self):
+        if self.fullscreen:
+            self.showNormal()
+        else:
+            self.showMaximized()
+        self.fullscreen = not self.fullscreen
 
     def exec(self):
         self.show()

@@ -25,6 +25,8 @@ class Dropdown(QComboBox, metaclass=Component):
     ):
         super().__init__(parent)
         self.view().window().setStyleSheet("border-radius: 10px;")
+        self.view().setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.view().setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self.view().setStyleSheet(
             """

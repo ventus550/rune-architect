@@ -12,11 +12,6 @@ from . import (
 )
 from .alignment import *
 from ...settings import settings
-
-_is_maximized = False
-_old_size = QSize()
-
-
 class TitleBar(QWidget):
     clicked = pyqtSignal(object)
     released = pyqtSignal(object)
@@ -101,38 +96,8 @@ class TitleBar(QWidget):
         self.title_label.mouseMoveEvent = moveWindow
 
         # MAXIMIZE / RESTORE
-        self.top_logo.mouseDoubleClickEvent = self.maximize_restore
-        self.title_label.mouseDoubleClickEvent = self.maximize_restore
-
-    def maximize_restore(self, e=None):
-        global _is_maximized
-        global _old_size
-
-        # CHANGE UI AND RESIZE GRIP
-        def change_ui():
-            if _is_maximized:
-                self.parent.ui.central_widget_layout.setContentsMargins(0, 0, 0, 0)
-                self.parent.ui.window.set_stylesheet(border_radius=0, border_size=0)
-                self.maximize_restore_button.set_icon(
-                    str(settings.assets_directory / "icon_restore.svg")
-                )
-            else:
-                self.parent.ui.central_widget_layout.setContentsMargins(10, 10, 10, 10)
-                self.parent.ui.window.set_stylesheet(border_radius=10, border_size=2)
-                self.maximize_restore_button.set_icon(
-                    str(settings.assets_directory / "icon_maximize.svg")
-                )
-
-        # CHECK EVENT
-        if self.parent.isMaximized():
-            _is_maximized = False
-            self.parent.showNormal()
-            # change_ui()
-        else:
-            _is_maximized = True
-            _old_size = QSize(self.parent.width(), self.parent.height())
-            self.parent.showMaximized()
-            # change_ui()
+        self.top_logo.mouseDoubleClickEvent = self.parent.toogle_fullscreen
+        self.title_label.mouseDoubleClickEvent = self.parent.toogle_fullscreen
 
     def attach_title_label(self):
         self.title_label = QLabel()
@@ -166,7 +131,7 @@ class TitleBar(QWidget):
             icon_path=str(settings.directories.assets / "icon_minimize.svg"),
         )
         self.bg_layout.addWidget(self.minimize_button)
-        self.minimize_button.released.connect(lambda: self.parent.showMinimized())
+        self.minimize_button.released.connect(self.parent.toogle_fullscreen)
 
         # MAXIMIZE / RESTORE BUTTON
         self.maximize_restore_button = IconButton(
@@ -175,7 +140,7 @@ class TitleBar(QWidget):
             icon_path=str(settings.directories.assets / "icon_maximize.svg"),
         )
         self.bg_layout.addWidget(self.maximize_restore_button)
-        self.maximize_restore_button.released.connect(lambda: self.maximize_restore())
+        self.maximize_restore_button.released.connect(self.parent.toogle_fullscreen)
 
         # CLOSE BUTTON
         self.close_button = IconButton(
@@ -184,4 +149,4 @@ class TitleBar(QWidget):
             icon_path=str(settings.directories.assets / "icon_close.svg"),
         )
         self.bg_layout.addWidget(self.close_button)
-        self.close_button.released.connect(lambda: self.parent.close())
+        self.close_button.released.connect(self.parent.close)

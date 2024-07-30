@@ -32,6 +32,7 @@ class Delegate(QStyledItemDelegate):
         self.numeric = numeric
 
     def createEditor(self, parent, option, index):
+        self.parent().model().setData(index, "")
         return Editor(
             parent=parent,
             numeric=self.numeric,
@@ -103,6 +104,11 @@ class DataFrame(QTableWidget, metaclass=Component):
         self.index = []
         self.label = []
         self.data = data
+    
+    def sizeHint(self):
+        if self.rowCount() == 0:
+            return QSize(self.width(), 0)
+        return QSize(self.width(), (self.rowCount() + 1) * (self.rowHeight(0) + 1) + self.padding)
 
     @property
     def data(self):
@@ -113,11 +119,6 @@ class DataFrame(QTableWidget, metaclass=Component):
 
             matrix[row][col] = text if text else None
         return pandas.DataFrame(matrix, columns=self.label, index=self.index)
-    
-    def sizeHint(self):
-        if self.rowCount() == 0:
-            return QSize(self.width(), 0)
-        return QSize(self.width(), (self.rowCount() + 1) * (self.rowHeight(0) + 1))
 
     @data.setter
     def data(self, df: pandas.DataFrame):
@@ -141,7 +142,6 @@ class DataFrame(QTableWidget, metaclass=Component):
         if event.button() == Qt.MouseButton.LeftButton:
             index = self.indexAt(event.pos())
             if index.isValid() and self.editable:
-                self.model().setData(index, "")  # Clear cell data
                 self.edit(index)  # Enter edit mode
         super().mousePressEvent(event)
 
