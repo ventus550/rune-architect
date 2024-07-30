@@ -91,6 +91,8 @@ class Application(ApplicationLayout):
                 .set_index("slot")
                 .drop(columns="spd%")
             )
+
+            # sum all effects
             summary_data = pandas.DataFrame(
                 transform.flatten_runes(solution, self.selected_monsters)
                 .apply(pandas.to_numeric, args=["coerce"])
@@ -98,13 +100,24 @@ class Application(ApplicationLayout):
                 .sum()
             ).T
             summary_data["monster"] = self.monster_selector.value
+
+            # apply set synergies
+            flat_synergies = transform.flatten_synergies(mapping.runes.synergies, self.selected_monsters)
+            set_counts = dict(solution.set.value_counts())
+            for set_name, count in set_counts.items():
+                if set_name not in flat_synergies.index:
+                    continue
+                set_info = flat_synergies.loc[set_name]
+                value = set_info['value']
+                effect = set_info['effect']
+                if set_info['stacked']:
+                    summary_data[effect] += value * (count // 2)
+                else:
+                    summary_data[effect] += value * (count // 4)
+
             self.summary.data = summary_data.drop(columns="slot")
 
             self.worker.quit()
             self.worker.wait()
         else:
             MessageBox(self, "The formulated program is infeasible.").exec()
-
-
-app = Application()
-app.exec()
