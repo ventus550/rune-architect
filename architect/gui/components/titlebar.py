@@ -131,7 +131,7 @@ class TitleBar(QWidget):
             icon_path=str(settings.directories.assets / "icon_minimize.svg"),
         )
         self.bg_layout.addWidget(self.minimize_button)
-        self.minimize_button.released.connect(self.parent.toogle_fullscreen)
+        self.minimize_button.released.connect(self.parent.showMinimized)
 
         # MAXIMIZE / RESTORE BUTTON
         self.maximize_restore_button = IconButton(
