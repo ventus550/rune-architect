@@ -1,5 +1,6 @@
 import pandas
 from .schema import *
+from .mapping.runes import sets
 
 @check_types
 def get_monsters_by_name(monsters: DataFrame[Monsters], monster_name: str) -> DataFrame[Monsters]:
@@ -7,7 +8,9 @@ def get_monsters_by_name(monsters: DataFrame[Monsters], monster_name: str) -> Da
 
 @check_types
 def sparse_rune_sets(runes: DataFrame[Runes]) -> DataFrame[SparseRunes]:
-	return pandas.concat([runes, pandas.get_dummies(runes.set, dtype=bool)], axis=1)
+	dummies = pandas.concat([runes, pandas.get_dummies(runes.set, dtype=bool)], axis=1)
+	dummies[list(set(sets.values()) - set(dummies.columns))] = False
+	return dummies
 
 @check_types
 def filter_equipped(runes: DataFrame[Runes], allowed_monsters: DataFrame[Monsters]) -> DataFrame[Runes]:
